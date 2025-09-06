@@ -1,249 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Web</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer"
-    />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    >
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    >
+  </head>
 
-    <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-        /* Search bar */
-        
-        .btn-search {
-            background-color: #fe4244;
-            color: white;
-            border-radius: 25px;
-            padding: 0 1rem;
-        }
-        
-        .search-inpute {
-            border-radius: 25px;
-            padding: 0.5rem 3rem;
-            font-size: 0.9rem;
-        }
-        /* Filters Section */
-        
-        #filters {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 2rem;
-            /* equal spacing */
-            margin: 2rem 0;
-        }
-        
-        .filter {
-            text-align: center;
-            opacity: 0.7;
-            transition: 0.3s;
-        }
-        
-        .filter:hover {
-            opacity: 1;
-            cursor: pointer;
-            transform: scale(1.1);
-        }
-        
-        .filter i {
-            font-size: 1.8rem;
-            margin-bottom: 0.3rem;
-            color: #fe4244;
-        }
-        
-        .filter p {
-            font-size: 0.85rem;
-            margin: 0;
-        }
-        /* Footer */
-        
-        footer {
-            background: #f8f9fa;
-            border-top: 1px solid #ddd;
-            padding: 1rem 0;
-            margin-top: auto;
-            /* Push footer to bottom */
-        }
-        
-        .f-info {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
-            text-align: center;
-            gap: 1rem;
-            max-width: 1100px;
-            margin: auto;
-        }
-        
-        .f-info-brand {
-            font-weight: bold;
-            font-size: 0.9rem;
-            color: #333;
-        }
-        
-        .f-info-social a {
-            margin: 0 0.5rem;
-            font-size: 1.3rem;
-            color: #555;
-            transition: 0.3s;
-        }
-        
-        .f-info-social a:hover {
-            color: #fe4244;
-        }
-        
-        .f-info-link a {
-            margin: 0 0.8rem;
-            text-decoration: none;
-            color: #333;
-            transition: 0.3s;
-            font-size: 0.9rem;
-        }
-        
-        .f-info-link a:hover {
-            color: #fe4244;
-        }
-    </style>
-</head>
-
-<body>
+  <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/Listings"><i class="fa-regular fa-compass"></i></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                    <a class="nav-link" href="/Listings">Shopping Card</a>
-                </div>
-                <div class="navbar-nav ms-auto">
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2 search-inpute" id="search1" type="search" placeholder="Search destination" onkeyup="Searchlist()">
-                        <button class="btn btn-search" type="submit"> search</button>
-                    </form>
-                </div>
-                <div class="navbar-nav ms-auto">
-                    <a class="nav-link" href="/#"><i class="fa-solid fa-cart-arrow-down"></i>Later</a>
-                </div>
-                <div class="navbar-nav ms-auto">
-                    <a class="nav-link" href="/#"><i class="fa-solid fa-cart-plus"></i>Card</a>
-                </div>
-            </div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand fw-bold" href="#">Code2Cart</a>
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- Navbar links -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="btn btn-primary btn-sm rounded" href="#"
+                >All Products</a
+              >
+            </li>
+            <li>
+              <a class="nav-link" href="#">
+                <i class="fas fa-shopping-cart fa-lg text-white"></i>
+              </a>
+            </li>
+          </ul>
         </div>
+      </div>
     </nav>
 
-    <!-- Filters -->
-    <div id="filters">
-        <div class="filter"><i class="fa-solid fa-person-dress"></i>
-            <p>Man Dress</p>
+    <!-- Carousel -->
+    <div
+      id="carouselExampleCaptions"
+      class="carousel slide"
+      data-bs-ride="carousel"
+      data-bs-interval="3000"
+    >
+      <div class="carousel-indicators">
+        <button
+          type="button"
+          data-bs-target="#carouselExampleCaptions"
+          data-bs-slide-to="0"
+          class="active"
+          aria-current="true"
+          aria-label="Slide 1"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#carouselExampleCaptions"
+          data-bs-slide-to="1"
+          aria-label="Slide 2"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#carouselExampleCaptions"
+          data-bs-slide-to="2"
+          aria-label="Slide 3"
+        ></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="Image1.avif" class="d-block w-100" alt="Slide 1" />
         </div>
-        <div class="filter"><i class="fa-solid fa-person-half-dress"></i>
-            <p>Half Dress</p>
+        <div class="carousel-item">
+          <img src="Image3.avif" class="d-block w-100" alt="Slide 2" />
         </div>
-        <div class="filter"><i class="fa-solid fa-school"></i>
-            <p>Home</p>
+        <div class="carousel-item">
+          <img src="Image2.jpg" class="d-block w-100" alt="Slide 3" />
         </div>
-        <div class="filter"><i class="fa-regular fa-child"></i>
-            <p>Child</p>
-        </div>
-        <div class="filter"><i class="fa-solid fa-camera"></i>
-            <p>camera</p>
-        </div>
-        <div class="filter"><i class="fa-solid fa-bath"></i>
-            <p>bath</p>
-        </div>
-        <div class="filter"><i class="fa-solid fa-gamepad"></i></i>
-            <p>gamepad</p>
-        </div>
-        <div class="filter"><i class="fa-solid fa-cow"></i>
-            <p>Farms</p>
-        </div>
-        <div class="filter"><i class="fa-solid fa-temperature-arrow-up"></i>
-            <p>Heating</p>
-        </div>
-        <div class="filter"><i class="fa-solid fa-tv"></i>
-            <p>TV</p>
-        </div>
-        <div class="filter"><i class="fa-solid fa-person-dress-burst"></i>
-            <p>AC</p>
-        </div>
-        <div class="filter"><i class="fa-brands fa-firefox"></i>
-            <p>Fireplace</p>
-        </div>
+      </div>
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#carouselExampleCaptions"
+        data-bs-slide="prev"
+      >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#carouselExampleCaptions"
+        data-bs-slide="next"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
     </div>
 
-
-    <!--Courosal-->
-
-    <div id="carouselExampleCaptions" class="carousel slide">
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-        </div>
-        <div class="carousel-inner width: 20px">
-            <div class="carousel-item active">
-                <img src="https://th.bing.com/th/id/R.d5c5f2246919265f53e6f56f80071dd3?rik=Q7O1od8exJDnbQ&riu=http%3a%2f%2fcdn.wallpapersafari.com%2f37%2f82%2fBI78kU.jpg&ehk=yP98fVqkFdzsxnJdZ17FmIQKByMdglW%2bEUXxXB7Mf6o%3d&risl=&pid=ImgRaw&r=0" class="d-block w-100"
-                    alt="...">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>First slide label</h5>
-                    <p>Some representative placeholder content for the first slide.</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <img src="https://tse3.mm.bing.net/th/id/OIP.GrSUL34U1c2amDc59EIWigHaEo?rs=1&pid=ImgDetMain&o=7&rm=3" class="d-block w-100" alt="...">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>Second slide label</h5>
-                    <p>Some representative placeholder content for the second slide.</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <img src="https://images.livspace-cdn.com/plain/https://d3gq2merok8n5r.cloudfront.net/abhinav/ond-1634120396-Obfdc/jas-1657179080-NnXAg/home-office-1657190695-S1DLs/bedroom-4-2-1-1664351164-Z5A06.jpg" class="d-block w-100" alt="...">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>Third slide label</h5>
-                    <p>Some representative placeholder content for the third slide.</p>
-                </div>
-            </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-    </div>
-    <!-- Footer -->
-    <footer>
-        <div class="f-info">
-            <div class="f-info-brand">&copy; 2025 Akshay Dange Limited</div>
-            <div class="f-info-social">
-                <a href="https://www.facebook.com"><i class="fa-brands fa-facebook"></i></a>
-                <a href="https://www.instagram.com"><i class="fa-brands fa-instagram"></i></a>
-                <a href="https://www.linkedin.com"> <i class="fa-brands fa-linkedin"></i></a>
-            </div>
-            <div class="f-info-link">
-                <a href="/privacy">Privacy</a>
-                <a href="/term">Terms</a>
-                <a href="/feedback-form">Feedback</a>
-            </div>
-        </div>
+    <br><br><br>
+    <footer class="bg-dark text-white text-center p- footer">
+      <p class="mb-0">© ShopEasy. All rights reserved.</p>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <script src="/script.js"></script>
-</body>
-
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
