@@ -1,0 +1,64 @@
+{
+  "Products": [
+    {
+      "id": "1",
+      "title": "Shoes",
+      "Price": 2999,
+      "ImagePath": "https://m.media-amazon.com/images/I/41mWz2aRrTL._SY695_.jpg"
+    },
+    {
+      "id": "2",
+      "title": "Deer Crystal Globe Lamp",
+      "Price": 299,
+      "ImagePath": "https://m.media-amazon.com/images/I/61vihvwHdBL._SX522_.jpg"
+    },
+    {
+      "id": "3",
+      "title": "AMOLED Luxury Smart Watch",
+      "Price": 2999,
+      "ImagePath": "https://m.media-amazon.com/images/I/61tvvx-IqLL._SX522_.jpg"
+    },
+    {
+      "id": "4",
+      "title": "Blaze Smartwatch",
+      "Price": 2999,
+      "ImagePath": "https://m.media-amazon.com/images/I/71YctMdZFwL._SX522_.jpg"
+    },
+    {
+      "id": "5",
+      "title": "Samsung Washing Machine",
+      "Price": 19999,
+      "ImagePath": "https://m.media-amazon.com/images/I/61wstFqAjyL._SY741_.jpg"
+    },
+    {
+      "id": "6",
+      "title": "Refrigerator",
+      "Price": 24999,
+      "ImagePath": "https://m.media-amazon.com/images/I/61+pdg8CfmL._SL1500_.jpg"
+    },
+    {
+      "id": "7",
+      "title": "Sony 139 cm Tv",
+      "Price": 57999,
+      "ImagePath": "https://m.media-amazon.com/images/I/81fTiaf5qCL._SX522_.jpg"
+    },
+    {
+      "id": "8",
+      "title": "LG 139 cm Tv",
+      "Price": 55999,
+      "ImagePath": "https://m.media-amazon.com/images/I/81tjZ4vI7xL._SX522_.jpg"
+    },
+    {
+      "id": "9",
+      "title": "Lenovo Ideapad 1 N4500 Laptop",
+      "Price": 29999,
+      "ImagePath": "https://m.media-amazon.com/images/I/71bDJ9wxxWL._SX679_.jpg"
+    },
+    {
+      "id": "10",
+      "title": "Acoustic Guitar Kit",
+      "Price": 2599,
+      "ImagePath": "https://m.media-amazon.com/images/I/618lmKBTMSL._SX679_.jpg"
+    }
+  ]
+}
