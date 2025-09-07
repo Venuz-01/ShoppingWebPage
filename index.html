@@ -8,90 +8,116 @@
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     >
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
-      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
       crossorigin="anonymous"
     >
     
     <link href="https://fonts.googleapis.com/css2?family=Story+Script&display=swap" rel="stylesheet">
- <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
   </head>
 
   <body>
     <!-- Navbar -->
-      
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-4">
-      <div class="container-fluid">
-        <a class="navbar-brand fw-bold" href="#">Code2Cart</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark p-4">
+  <div class="container-fluid">
+    <a class="navbar-brand fw-bold" href="#">Code2Cart</a>
 
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <!-- Navbar links -->
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
-  Add Products
-</button>
-             
-              >
-            </li>
-            <li>
-              <a class="nav-link" href="#">
-                <i class="fas fa-shopping-cart fa-lg text-white"></i>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto align-items-center">
+
+       <!-- All Products Button -->
+<li class="nav-item me-3">
+  <a href="#" id="allProductsBtn" class="btn btn-outline-light btn-sm">All Products</a>
+</li>
+
+<!-- Add Products Button -->
+<li class="nav-item me-3">
+  <button
+    type="button"
+    class="btn btn-outline-light btn-sm"
+    data-bs-toggle="modal"
+    data-bs-target="#myModal"
+  >
+    Add Products
+  </button>
+</li>
+
+        <!-- Search Bar -->
+        <li class="nav-item me-3">
+          <form class="d-flex" role="search" onsubmit="return false;">
+            <input
+              id="searchInput"
+              class="form-control form-control-sm me-2"
+              type="search"
+              placeholder="Search products"
+              aria-label="Search"
+              onkeyup="searchProducts()"
+            />
+            <button
+              class="btn btn-outline-light btn-sm"
+              type="button"
+              onclick="searchProducts()"
+            >
+              <i class="fas fa-search"></i>
+            </button>
+          </form>
+        </li>
+
+        <!-- Cart Icon -->
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+            <i class="fas fa-shopping-cart fa-lg text-white"></i>
+          </a>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
 
     <!-- model body from here -->
     <div class="modal" id="myModal">
   <div class="modal-dialog">
     <div class="modal-content">
 
-     
       <div class="modal-header">
         <h4 class="modal-title">Add Product</h4>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
 
-     
       <div class="modal-body">
         <form method="post">
-    <div class="row">
-      <div class="col">
-        <input type="text" class="form-control" placeholder="Enter product title" name="title">
-      </div>
-      <div class="col">
-        <input type="number" class="form-control" placeholder="Enter product price" name="price">
-      </div>
-    </div>
-    <div class="row" style="margin-top: 5px;">
-      <div class="col">
-        <input type="file" class="form-control" placeholder="upload product image" name="imagefile" accept="image/*">
-      </div>
-      
-
-
-    </div>
-  </form>
+          <div class="row">
+            <div class="col">
+              <input type="text" class="form-control" placeholder="Enter product title" name="title">
+            </div>
+            <div class="col">
+              <input type="number" class="form-control" placeholder="Enter product price" name="price">
+            </div>
+          </div>
+          <div class="row" style="margin-top: 5px;">
+            <div class="col">
+              <input type="file" class="form-control" placeholder="upload product image" name="imagefile" accept="image/*">
+            </div>
+          </div>
+        </form>
       </div>
 
-      
       <div class="modal-footer" style="justify-content: center;">
         <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">ADD</button>
       </div>
@@ -100,86 +126,46 @@
   </div>
 </div>
 
-  </div>
-  <!-- to this -->
-
-    <!-- Carousel -->
-     <div class="container my-5">
+  <!-- Carousel -->
+  <div class="container my-5">
     <div
       id="carouselExampleCaptions"
       class="carousel slide"
       data-bs-ride="carousel"
-      data-bs-interval="3000"
-    >
+      data-bs-interval="3000">
+
       <div class="carousel-indicators">
-        <button
-          type="button"
-          data-bs-target="#carouselExampleCaptions"
-          data-bs-slide-to="0"
-          class="active"
-          aria-current="true"
-          aria-label="Slide 1"
-        ></button>
-        <button
-          type="button"
-          data-bs-target="#carouselExampleCaptions"
-          data-bs-slide-to="1"
-          aria-label="Slide 2"
-        ></button>
-        <button
-          type="button"
-          data-bs-target="#carouselExampleCaptions"
-          data-bs-slide-to="2"
-          aria-label="Slide 3"
-        ></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"></button>
       </div>
       <div class="carousel-inner">
         <div class="carousel-item active">
           <img src="Image1.avif" class="d-block w-100" alt="Slide 1" />
         </div>
         <div class="carousel-item">
-          <img src="Image3.avif" class="d-block w-100" alt="Slide 2" />
+          <img src="Image6.avif" class="d-block w-100" alt="Slide 2" />
         </div>
         <div class="carousel-item">
-          <img src="Image2.jpg" class="d-block w-100" alt="Slide 3" />
+          <img src="Image7.avif" class="d-block w-100" alt="Slide 3" />
         </div>
       </div>
-      <button
-        class="carousel-control-prev"
-        type="button"
-        data-bs-target="#carouselExampleCaptions"
-        data-bs-slide="prev"
-      >
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
         <span class="visually-hidden">Previous</span>
       </button>
-      <button
-        class="carousel-control-next"
-        type="button"
-        data-bs-target="#carouselExampleCaptions"
-        data-bs-slide="next"
-      >
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
         <span class="visually-hidden">Next</span>
       </button>
     </div>
+  </div>
    
-    <!-- cards -->
-    
-  
-    
-  <div class="container my-4">
+  <!-- Products Section -->
+  <div id="productsSection" class="container my-4">
+    <h2 id="sectionTitle" class="mb-4 text-center">All Products</h2>
     <div id="cardsContainer" class="row g-4"></div>
   </div>
-    <!-- end of cards -->
-    
-     <!-- footer -->
-
-    <!-- <br><br><br>
-    <footer class="bg-dark text-white text-center p- footer">
-      <p class="mb-0">© ShopEasy. All rights reserved.</p>
-    </footer> -->
- 
   
 <footer id="foot" class="w-100 bg-dark text-white text-center py-3">
   <p class="mb-2">© 2025 Code2Cart . All rights reserved.</p>
@@ -194,12 +180,10 @@
 </footer> 
  
 <script src="script.js"></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-      crossorigin="anonymous"
-    ></script>
-  
+<script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+  crossorigin="anonymous"
+></script>
   
   </body>
 </html>
