@@ -31,6 +31,12 @@
   font-family: "Story Script", sans-serif;
   font-weight: 400;
   font-style: normal;}
+
+  .cart-badge {
+  font-size: 0.7rem;
+  padding: 0.3em 0.5em;
+}
+
   
   /* #foot {
       background-color: #2424b8;
