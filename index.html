@@ -71,18 +71,18 @@
 
      
       <div class="modal-body">
-        <form method="post">
+        <form>
     <div class="row">
       <div class="col">
-        <input type="text" class="form-control" placeholder="Enter product title" name="title">
+        <input id="name"  type="text" class="form-control" placeholder="Enter product title" name="title">
       </div>
       <div class="col">
-        <input type="number" class="form-control" placeholder="Enter product price" name="price">
+        <input id="rate" type="number" class="form-control" placeholder="Enter product price" name="price">
       </div>
     </div>
     <div class="row" style="margin-top: 5px;">
       <div class="col">
-        <input type="file" class="form-control" placeholder="upload product image" name="imagefile" accept="image/*">
+        <input  id="picture"type="file" class="form-control" placeholder="upload product image" name="imagefile" accept="image/*">
       </div>
       
 
@@ -93,7 +93,7 @@
 
       
       <div class="modal-footer" style="justify-content: center;">
-        <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">ADD</button>
+        <button type="submit" class="btn btn-danger" data-bs-dismiss="modal" onclick="Addproduct()">ADD</button>
       </div>
 
     </div>

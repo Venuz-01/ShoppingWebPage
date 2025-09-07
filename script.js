@@ -26,3 +26,21 @@ const cardimage = document.getElementById("cardsContainer");
     });
   })
   .catch(error => console.error("Error loading data:", error));
+  // add product
+  function Addproduct() {
+    alert("Product added successfully!");
+}
+
+
+
+
+  // function Addproduct(){
+  //   const name = document.getElementById("name").value;
+  //   const rate = document.getElementById("rate").value;
+  //   const picture = document.getElementById("picture").value;
+  //   const data = {name, rate, picture};
+  //   const myjson = JSON.stringify(data, null, 3);
+  //   localStorage.setItem("Products.json",myjson);
+
+  // }
+
