@@ -26,9 +26,11 @@
     },
     {
       "id": "5",
-      "title": "Samsung Washing Machine",
-      "Price": 19999,
-      "ImagePath": "https://m.media-amazon.com/images/I/61wstFqAjyL._SY741_.jpg"
+      
+      "title": "Asus Zenbook Laptop",
+      "Price": 59999,
+    
+      "ImagePath": "https://p1-ofp.static.pub/medias/25470493404_82XQAG_202211110210051678812783464.png"
     },
     {
       "id": "6",
@@ -53,12 +55,7 @@
       "title": "Lenovo Ideapad 1 N4500 Laptop",
       "Price": 29999,
       "ImagePath": "https://m.media-amazon.com/images/I/71bDJ9wxxWL._SX679_.jpg"
-    },
-    {
-      "id": "10",
-      "title": "Acoustic Guitar Kit",
-      "Price": 2599,
-      "ImagePath": "https://m.media-amazon.com/images/I/618lmKBTMSL._SX679_.jpg"
     }
+   
   ]
 }
