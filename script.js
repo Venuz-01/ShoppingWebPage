@@ -3,6 +3,7 @@ const searchInput = document.getElementById("searchInput");
 const cartIcon = document.querySelector(".fa-shopping-cart");
 const saveIcon = document.querySelector(".fa-bookmark");
 const sectionTitle = document.getElementById("sectionTitle");
+const productsSection = document.getElementById("productsSection"); // ✅ grab products section
 
 // Global variables
 let products = [];
@@ -20,8 +21,8 @@ fetch('http://localhost:3000/Products')
   })
   .catch(error => console.error("Error loading data:", error));
 
-  // addproducts part
-  function Addproduct() {
+// addproducts part
+function Addproduct() {
   const name = document.getElementById("name").value;
   const rate = document.getElementById("rate").value;
   const picture = document.getElementById("picture").value;
@@ -41,30 +42,21 @@ fetch('http://localhost:3000/Products')
   })
   .then(response => response.json())
   .then(() => {
-    
     alert("Product added successfully!");
-
-
-    //without loading it  will show the elements on the secreen
     fetch('http://localhost:3000/Products')
-  .then(result => result.json())
-  .then(data => {
-    products = data;
-    displayProducts(products, "all"); 
-  });
+      .then(result => result.json())
+      .then(data => {
+        products = data;
+        displayProducts(products, "all"); 
+      });
   })
   .catch(()=> {
-    
     alert("Failed to add product.");
   });
 }
 
-
 // Display products based on mode
-function displayProducts(productsList, mode = "all")
-// Change heading dynamically
- {
-
+function displayProducts(productsList, mode = "all") {
   sectionTitle.textContent =
     mode === "cart" ? "Cart Items" :
     mode === "saved" ? "Saved Items" :
@@ -108,12 +100,13 @@ function displayProducts(productsList, mode = "all")
       btn.addEventListener("click", (e) => {
         e.preventDefault();
         const productId = e.target.getAttribute("data-id");
-        const product = products.find(p => p.id === productId);
+        const product = products.find(p => p.id == productId);
 
-        if (product && !cartItems.some(p => p.id === productId)) {
+        if (product && !cartItems.some(p => p.id == productId)) {
           cartItems.push(product);
           cartCount++;
           updateCartIcon();
+          showToast(); 
         }
       });
     });
@@ -122,9 +115,9 @@ function displayProducts(productsList, mode = "all")
       btn.addEventListener("click", (e) => {
         e.preventDefault();
         const productId = e.target.getAttribute("data-id");
-        const product = products.find(p => p.id === productId);
+        const product = products.find(p => p.id == productId);
 
-        if (product && !savedItems.some(p => p.id === productId)) {
+        if (product && !savedItems.some(p => p.id == productId)) {
           savedItems.push(product);
           savedCount++;
           updateSavedIcon();
@@ -138,10 +131,9 @@ function displayProducts(productsList, mode = "all")
       btn.addEventListener("click", (e) => {
         e.preventDefault();
         const productId = e.target.getAttribute("data-id");
-        cartItems = cartItems.filter(p => p.id !== productId);
+        cartItems = cartItems.filter(p => p.id != productId);
         cartCount = cartItems.length;
         updateCartIcon();
-
         displayProducts(cartItems, "cart");
       });
     });
@@ -152,10 +144,9 @@ function displayProducts(productsList, mode = "all")
       btn.addEventListener("click", (e) => {
         e.preventDefault();
         const productId = e.target.getAttribute("data-id");
-        savedItems = savedItems.filter(p => p.id !== productId);
+        savedItems = savedItems.filter(p => p.id != productId);
         savedCount = savedItems.length;
         updateSavedIcon();
-
         displayProducts(savedItems, "saved");
       });
     });
@@ -174,13 +165,7 @@ function updateCartIcon() {
   }
 
   badge.textContent = cartCount;
-  if (cartCount > 0) {
-    badge.textContent = cartCount;
-    badge.style.display = "inline-block";
-  } else {
-    badge.style.display = "none";
-  }
-
+  badge.style.display = cartCount > 0 ? "inline-block" : "none";
 }
 
 // Update saved icon badge
@@ -207,20 +192,30 @@ function searchProducts() {
   displayProducts(filtered, "all");
 }
 
-// All Products button click
+// ✅ All Products button click
 document.getElementById("allProductsBtn").addEventListener("click", (e) => {
   e.preventDefault();
   displayProducts(products, "all");
+  productsSection.scrollIntoView({ behavior: "smooth" }); // 👈 scroll to section
 });
 
 // Cart Icon click
 cartIcon.parentElement.addEventListener("click", (e) => {
   e.preventDefault();
   displayProducts(cartItems, "cart");
+  productsSection.scrollIntoView({ behavior: "smooth" });
 });
 
 // Save for Later Icon click
 saveIcon.parentElement.addEventListener("click", (e) => {
   e.preventDefault();
   displayProducts(savedItems, "saved");
+  productsSection.scrollIntoView({ behavior: "smooth" });
 });
+
+// Toast Function
+function showToast() {
+  const toastEl = document.getElementById("toastMsg");
+  const toast = new bootstrap.Toast(toastEl);
+  toast.show();
+}
