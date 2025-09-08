@@ -1,26 +1,34 @@
 const cardimage = document.getElementById("cardsContainer");
 const searchInput = document.getElementById("searchInput");
 const cartIcon = document.querySelector(".fa-shopping-cart");
+const saveIcon = document.querySelector(".fa-bookmark");
 const sectionTitle = document.getElementById("sectionTitle");
 
 // Global variables
 let products = [];
 let cartItems = [];
+let savedItems = [];
 let cartCount = 0;
+let savedCount = 0;
 
 // Fetch products
 fetch('Products.json')
   .then(result => result.json())
   .then(data => {
     products = data.Products;
-    displayProducts(products, false);
+    displayProducts(products, "all");
   })
   .catch(error => console.error("Error loading data:", error));
 
-// Function to display products or cart items
-function displayProducts(productsList, isCart = false) {
-  // Change heading dynamically
-  sectionTitle.textContent = isCart ? "Cart Items" : "All Products";
+// Display products based on mode
+function displayProducts(productsList, mode = "all")
+// Change heading dynamically
+ {
+
+  sectionTitle.textContent =
+    mode === "cart" ? "Cart Items" :
+    mode === "saved" ? "Saved Items" :
+    "All Products";
 
   cardimage.innerHTML = "";
 
@@ -37,13 +45,15 @@ function displayProducts(productsList, isCart = false) {
           <div class="card-body">
             <h5 class="card-title">${product.title}</h5>
             <p class="card-text">₹${product.Price}</p>
-            <div class="d-flex justify-content-between">
+            <div class="d-flex justify-content-between flex-wrap gap-2">
               ${
-                isCart
+                mode === "cart"
                   ? `<a href="#" class="btn btn-danger remove-from-cart" data-id="${product.id}">Remove</a>`
+                  : mode === "saved"
+                  ? `<a href="#" class="btn btn-warning remove-from-saved" data-id="${product.id}">Remove</a>`
                   : `<a href="#" class="btn btn-secondary add-to-cart" data-id="${product.id}">Add to cart</a>
                      <a href="#" class="btn btn-primary">Buy Now</a>
-                     <a href="#" class="btn btn-secondary">Save for later</a>`
+                     <a href="#" class="btn btn-secondary save-for-later" data-id="${product.id}">Save for later</a>`
               }
             </div>
           </div>
@@ -53,8 +63,7 @@ function displayProducts(productsList, isCart = false) {
     cardimage.innerHTML += card;
   });
 
-  if (!isCart) {
-    // Add-to-cart buttons
+  if (mode === "all") {
     document.querySelectorAll(".add-to-cart").forEach(btn => {
       btn.addEventListener("click", (e) => {
         e.preventDefault();
@@ -68,8 +77,23 @@ function displayProducts(productsList, isCart = false) {
         }
       });
     });
-  } else {
-    // Remove-from-cart buttons
+
+    document.querySelectorAll(".save-for-later").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        const productId = e.target.getAttribute("data-id");
+        const product = products.find(p => p.id === productId);
+
+        if (product && !savedItems.some(p => p.id === productId)) {
+          savedItems.push(product);
+          savedCount++;
+          updateSavedIcon();
+        }
+      });
+    });
+  }
+
+  if (mode === "cart") {
     document.querySelectorAll(".remove-from-cart").forEach(btn => {
       btn.addEventListener("click", (e) => {
         e.preventDefault();
@@ -78,12 +102,21 @@ function displayProducts(productsList, isCart = false) {
         cartCount = cartItems.length;
         updateCartIcon();
 
-        if (cartItems.length === 0) {
-          sectionTitle.textContent = "Cart Items";
-          cardimage.innerHTML = `<p class="text-center fs-4 mt-4">Your cart is empty!</p>`;
-        } else {
-          displayProducts(cartItems, true);
-        }
+        displayProducts(cartItems, "cart");
+      });
+    });
+  }
+
+  if (mode === "saved") {
+    document.querySelectorAll(".remove-from-saved").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        const productId = e.target.getAttribute("data-id");
+        savedItems = savedItems.filter(p => p.id !== productId);
+        savedCount = savedItems.length;
+        updateSavedIcon();
+
+        displayProducts(savedItems, "saved");
       });
     });
   }
@@ -100,12 +133,29 @@ function updateCartIcon() {
     cartIcon.parentElement.appendChild(badge);
   }
 
+  badge.textContent = cartCount;
   if (cartCount > 0) {
     badge.textContent = cartCount;
     badge.style.display = "inline-block";
   } else {
     badge.style.display = "none";
   }
+
+}
+
+// Update saved icon badge
+function updateSavedIcon() {
+  let badge = document.querySelector(".saved-badge");
+
+  if (!badge) {
+    badge = document.createElement("span");
+    badge.classList.add("saved-badge", "position-absolute", "top-0", "start-100", "translate-middle", "badge", "rounded-pill", "bg-warning");
+    saveIcon.parentElement.style.position = "relative";
+    saveIcon.parentElement.appendChild(badge);
+  }
+
+  badge.textContent = savedCount;
+  badge.style.display = savedCount > 0 ? "inline-block" : "none";
 }
 
 // Search products
@@ -114,22 +164,23 @@ function searchProducts() {
   const filtered = products.filter(product =>
     product.title.toLowerCase().includes(query)
   );
-  displayProducts(filtered, false);
+  displayProducts(filtered, "all");
 }
 
 // All Products button click
 document.getElementById("allProductsBtn").addEventListener("click", (e) => {
   e.preventDefault();
-  displayProducts(products, false);
+  displayProducts(products, "all");
 });
 
 // Cart Icon click
 cartIcon.parentElement.addEventListener("click", (e) => {
   e.preventDefault();
-  if (cartItems.length === 0) {
-    sectionTitle.textContent = "Cart Items";
-    cardimage.innerHTML = `<p class="text-center fs-4 mt-4">Your cart is empty!</p>`;
-  } else {
-    displayProducts(cartItems, true);
-  }
+  displayProducts(cartItems, "cart");
+});
+
+// Save for Later Icon click
+saveIcon.parentElement.addEventListener("click", (e) => {
+  e.preventDefault();
+  displayProducts(savedItems, "saved");
 });
