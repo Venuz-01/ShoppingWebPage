@@ -3,7 +3,7 @@ const searchInput = document.getElementById("searchInput");
 const cartIcon = document.querySelector(".fa-shopping-cart");
 const saveIcon = document.querySelector(".fa-bookmark");
 const sectionTitle = document.getElementById("sectionTitle");
-const productsSection = document.getElementById("productsSection"); // ✅ grab products section
+const productsSection = document.getElementById("productsSection"); //  grab products section
 
 // Global variables
 let products = [];
@@ -11,6 +11,13 @@ let cartItems = [];
 let savedItems = [];
 let cartCount = 0;
 let savedCount = 0;
+
+//diglog box function
+ function showSaveModal() {
+  const modal1 = document.getElementById("saveModal");
+  const modal = new bootstrap.Modal(modal1);
+  modal.show();
+ }
 
 // Fetch products
 fetch('http://localhost:3000/Products')
@@ -121,6 +128,7 @@ function displayProducts(productsList, mode = "all") {
           savedItems.push(product);
           savedCount++;
           updateSavedIcon();
+          showSaveModal();  // showing confirmation message.
         }
       });
     });
@@ -192,11 +200,11 @@ function searchProducts() {
   displayProducts(filtered, "all");
 }
 
-// ✅ All Products button click
+// All Products button click
 document.getElementById("allProductsBtn").addEventListener("click", (e) => {
   e.preventDefault();
   displayProducts(products, "all");
-  productsSection.scrollIntoView({ behavior: "smooth" }); // 👈 scroll to section
+  productsSection.scrollIntoView({ behavior: "smooth" }); // scroll to section
 });
 
 // Cart Icon click
@@ -219,3 +227,4 @@ function showToast() {
   const toast = new bootstrap.Toast(toastEl);
   toast.show();
 }
+
