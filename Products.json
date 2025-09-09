@@ -46,9 +46,10 @@
     },
     {
       "id": "8",
-      "title": "LG 139 cm Tv",
+      "title": "LG 139 cm Tv lcd",
       "Price": 55999,
-      "ImagePath": "https://m.media-amazon.com/images/I/81tjZ4vI7xL._SX522_.jpg"
+
+      "ImagePath": "https://img.freepik.com/free-photo/laptop-stone-surface-sea-background_1232-430.jpg?semt=ais_hybrid&w=740&q=80"
     },
     {
       "id": "9",
@@ -56,6 +57,7 @@
       "Price": 29999,
       "ImagePath": "https://m.media-amazon.com/images/I/71bDJ9wxxWL._SX679_.jpg"
     }
-   
+    
+    
   ]
 }
