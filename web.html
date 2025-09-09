@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Happy Birthday Vyshnavi 🎉</title>
+  <style>
+    :root{ --bg1:#0f172a; --bg2:#0b1220; --accent:#ff66b3; --gold:#ffd166 }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%;width:100%;font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;overflow:hidden}
+
+    body{
+      background:linear-gradient(135deg,var(--bg1),var(--bg2));
+      color:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      height:100vh;
+    }
+
+    .card{
+      position:relative;
+      width:80%;
+      max-width:900px;
+      background:linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02));
+      border-radius:16px;
+      padding:28px 32px;
+      overflow:hidden;
+      box-shadow:0 10px 40px rgba(0,0,0,0.6);
+      transition:opacity 1s ease;
+      z-index:2;
+    }
+
+    h1{font-size:44px;margin:0 0 6px;letter-spacing:0.02em;text-align:center}
+    .subtitle{text-align:center;color:rgba(255,255,255,0.75);margin:0 0 18px}
+    .from-group{text-align:center;margin-top:18px;font-size:16px;color:rgba(255,255,255,0.85);font-weight:600}
+    footer{text-align:center;margin-top:12px;color:rgba(255,255,255,0.55);font-size:13px}
+
+    /* balloons + confetti */
+    .balloons{position:absolute;inset:0;pointer-events:none;z-index:1}
+    .balloon{position:absolute;width:80px;height:110px;border-radius:50% 50% 48% 48%;transform-origin:center bottom;opacity:0.9}
+    .balloon:after{content:'';position:absolute;left:50%;bottom:-18px;width:2px;height:28px;background:rgba(255,255,255,0.3);transform:translateX(-50%)}
+    @keyframes floatUp{0%{transform:translateY(120%) rotate(-6deg)}50%{transform:translateY(40%) rotate(6deg)}100%{transform:translateY(-30%) rotate(-3deg)}}
+    .b1{background:linear-gradient(180deg,#ff7eb6,#ff66b3);left:6%;bottom:-10%;animation:floatUp 10s ease-in-out infinite}
+    .b2{background:linear-gradient(180deg,#ffd166,#ff9f1c);left:20%;bottom:-20%;width:64px;height:90px;animation:floatUp 8s 0.6s infinite}
+    .b3{background:linear-gradient(180deg,#7ee8fa,#5a9);left:36%;bottom:-15%;width:72px;height:100px;animation:floatUp 12s 0.3s infinite}
+    .b4{background:linear-gradient(180deg,#9b5cff,#6b21a8);right:18%;bottom:-12%;animation:floatUp 9.5s 0.2s infinite}
+    .b5{background:linear-gradient(180deg,#76b9ff,#1e90ff);right:6%;bottom:-22%;width:68px;height:96px;animation:floatUp 11s 0.9s infinite}
+
+    .confetti{position:absolute;inset:0;pointer-events:none;z-index:1}
+    .confetti span{position:absolute;width:10px;height:14px;opacity:0.95;transform-origin:center;animation:fall 4s linear infinite}
+    @keyframes fall{0%{transform:translateY(-10vh) rotate(0) translateX(0)}100%{transform:translateY(120vh) rotate(540deg) translateX(60px)}}
+
+    .content{position:relative;z-index:3;padding:10px 12px;max-width:900px;margin:auto}
+    .message{background:linear-gradient(90deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:18px;border-radius:12px}
+  </style>
+</head>
+<body>
+  <div class="balloons" aria-hidden="true">
+    <div class="balloon b1"></div>
+    <div class="balloon b2"></div>
+    <div class="balloon b3"></div>
+    <div class="balloon b4"></div>
+    <div class="balloon b5"></div>
+  </div>
+
+  <div class="confetti" id="confetti" aria-hidden="true"></div>
+
+  <div class="card" id="card">
+    <div class="content">
+      <h1>Happy Birthday, Vyshnavi! 🎂</h1>
+      <div class="subtitle">Wishing you a day full of joy, surprises and all the cake you can eat.</div>
+
+      <div class="message">
+        <p style="text-align:center"><strong>From the heart:</strong> Vyshnavi, may every moment today sparkle like you do. Keep shining!</p>
+        <p style="text-align:center"><strong>For your dreams:</strong> May your year ahead bring bold adventures and small peaceful moments in equal measure.</p>
+        <p style="text-align:center"><strong>Happiness:</strong> May laughter follow you and worry leave. You deserve the brightest days.</p>
+        <p style="text-align:center"><strong>Success:</strong> May your efforts bloom into achievements — big and small — that make you proud.</p>
+      </div>
+
+      <div class="from-group">With love from: Code&Coffee Team - Saikamaqbool,  Venugopal, Prasanth, Akshay 💖</div>
+      <footer>Made with ❤️ — Happy Birthday again, Vyshnavi!</footer>
+    </div>
+  </div>
+
+  <script>
+    // Generate confetti
+    const confettiContainer = document.getElementById('confetti');
+    const colors = ['#ff66b3','#ffd166','#7ee8fa','#9b5cff','#76b9ff'];
+    function makeConfetti(){
+      confettiContainer.innerHTML = '';
+      for(let i=0;i<48;i++){
+        const el = document.createElement('span');
+        el.style.left = (Math.random()*100)+'%';
+        el.style.top = (Math.random()*-20)+'vh';
+        el.style.width = (6 + Math.random()*12)+'px';
+        el.style.height = (8 + Math.random()*14)+'px';
+        el.style.background = colors[i % colors.length];
+        el.style.transform = 'rotate('+ (Math.random()*360) +'deg)';
+        el.style.animationDelay = (Math.random()*3)+'s';
+        confettiContainer.appendChild(el);
+      }
+    }
+    makeConfetti();
+
+    // Redirect with fade-out
+    setTimeout(() => {
+      document.getElementById('card').style.opacity = "0";
+      setTimeout(() => { window.location.href = "index.html"; }, 1000);
+    }, 15000); // 5 seconds display
+  </script>
+</body>
+</html>
