@@ -26,10 +26,8 @@
     },
     {
       "id": "5",
-      
       "title": "Asus Zenbook Laptop",
       "Price": 59999,
-    
       "ImagePath": "https://p1-ofp.static.pub/medias/25470493404_82XQAG_202211110210051678812783464.png"
     },
     {
@@ -48,7 +46,6 @@
       "id": "8",
       "title": "LG 139 cm Tv lcd",
       "Price": 55999,
-
       "ImagePath": "https://img.freepik.com/free-photo/laptop-stone-surface-sea-background_1232-430.jpg?semt=ais_hybrid&w=740&q=80"
     },
     {
@@ -57,7 +54,5 @@
       "Price": 29999,
       "ImagePath": "https://m.media-amazon.com/images/I/71bDJ9wxxWL._SX679_.jpg"
     }
-    
-    
   ]
 }

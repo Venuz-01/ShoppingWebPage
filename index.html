@@ -19,209 +19,233 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Story+Script&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+      #foot {
+        margin-top: auto;
+      }
+    </style>
   </head>
 
   <body>
     <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark p-4">
-  <div class="container-fluid">
-    <a class="navbar-brand fw-bold" href="#">Code2Cart</a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-4">
+      <div class="container-fluid">
+        <a class="navbar-brand fw-bold" href="#">Code2Cart</a>
 
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarNav"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
+        <!-- Navbar links -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto align-items-center">
 
-    <!-- Navbar links -->
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto align-items-center">
+            <!-- All Products Button -->
+            <li class="nav-item me-3">
+              <a href="#" id="allProductsBtn" class="btn btn-outline-light btn-sm">All Products</a>
+            </li>
 
-       <!-- All Products Button -->
-<li class="nav-item me-3">
-  <a href="#" id="allProductsBtn" class="btn btn-outline-light btn-sm">All Products</a>
-</li>
+            <!-- Add Products Button -->
+            <li class="nav-item me-3">
+              <button
+                type="button"
+                class="btn btn-outline-light btn-sm"
+                data-bs-toggle="modal"
+                data-bs-target="#myModal"
+              >
+                Add Products
+              </button>
+            </li>
 
-<!-- Add Products Button -->
-<li class="nav-item me-3">
-  <button
-    type="button"
-    class="btn btn-outline-light btn-sm"
-    data-bs-toggle="modal"
-    data-bs-target="#myModal"
-  >
-    Add Products
-  </button>
-</li>
+            <!-- Search Bar -->
+            <li class="nav-item me-3">
+              <form class="d-flex" role="search" onsubmit="return false;">
+                <input
+                  id="searchInput"
+                  class="form-control form-control-sm me-2"
+                  type="search"
+                  placeholder="Search products"
+                  aria-label="Search"
+                  onkeyup="searchProducts()"
+                />
+                <button
+                  class="btn btn-outline-light btn-sm"
+                  type="button"
+                  onclick="searchProducts()"
+                >
+                  <i class="fas fa-search"></i>
+                </button>
+              </form>
+            </li>
 
-        <!-- Search Bar -->
-        <li class="nav-item me-3">
-          <form class="d-flex" role="search" onsubmit="return false;">
-            <input
-              id="searchInput"
-              class="form-control form-control-sm me-2"
-              type="search"
-              placeholder="Search products"
-              aria-label="Search"
-              onkeyup="searchProducts()"
-            />
-            <button
-              class="btn btn-outline-light btn-sm"
-              type="button"
-              onclick="searchProducts()"
-            >
-              <i class="fas fa-search"></i>
-            </button>
-          </form>
-        </li>
+            <!-- Save for Later Icon -->
+            <li class="nav-item">
+              <a class="nav-link" href="#" id="saveForLaterIcon">
+                 <i class="fas fa-bookmark fa-lg text-white"></i>
+              </a>
+            </li>
 
-         <!-- Save for Later Icon -->
-        <li class="nav-item">
-          <a class="nav-link" href="#" id="saveForLaterIcon">
-             <i class="fas fa-bookmark fa-lg text-white"></i>
-          </a>
-        </li>
+            <!-- Cart Icon -->
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <i class="fas fa-shopping-cart fa-lg text-white"></i>
+              </a>
+            </li>
 
-        <!-- Cart Icon -->
-        <li class="nav-item">
-          <a class="nav-link" href="#">
-            <i class="fas fa-shopping-cart fa-lg text-white"></i>
-          </a>
-        </li>
-
-      </ul>
-    </div>
-  </div>
-</nav>
+          </ul>
+        </div>
+      </div>
+    </nav>
 
     <!-- model body from here -->
     <div class="modal" id="myModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
+      <div class="modal-dialog">
+        <div class="modal-content">
 
-      <div class="modal-header">
-        <h4 class="modal-title">Add Product</h4>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
+          <div class="modal-header">
+            <h4 class="modal-title">Add Product</h4>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
 
-      <div class="modal-body">
-        <form>
-    <div class="row">
-      <div class="col">
-        <input id="name"  type="text" class="form-control" placeholder="Enter product title" name="title">
-      </div>
-      <div class="col">
-        <input id="rate" type="number" class="form-control" placeholder="Enter product price" name="price">
+          <div class="modal-body">
+            <form>
+              <div class="row">
+                <div class="col">
+                  <input id="name"  type="text" class="form-control" placeholder="Enter product title" name="title">
+                </div>
+                <div class="col">
+                  <input id="rate" type="number" class="form-control" placeholder="Enter product price" name="price">
+                </div>
+              </div>
+              <div class="row" style="margin-top: 5px;">
+                <div class="col">
+                  <input  id="picture" type="url" class="form-control" placeholder="upload product image" name="imagefile" accept="image/*">
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <div class="modal-footer" style="justify-content: center;">
+            <button type="submit" class="btn btn-danger" data-bs-dismiss="modal" onclick="Addproduct()">ADD</button>
+          </div>
+
+        </div>
       </div>
     </div>
-    <div class="row" style="margin-top: 5px;">
-      <div class="col">
-        <input  id="picture"type="url" class="form-control" placeholder="upload product image" name="imagefile" accept="image/*">
+
+    <!-- Carousel -->
+    <div id="carouselContainer" class="container my-5 text-center">
+  <div
+    id="carouselExampleCaptions"
+    class="carousel slide custom-carousel"
+    data-bs-ride="carousel"
+    data-bs-interval="3000">
+
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"></button>
+    </div>
+
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="images/Image1.avif" class="d-block.w-50" alt="Slide 1" />
+      </div>
+      <div class="carousel-item">
+        <img src="images/Image6.avif" class="d-block.w-50" alt="Slide 2" />
+      </div>
+      <div class="carousel-item">
+        <img src="images/Image7.avif" class="d-block.w-50" alt="Slide 3" />
       </div>
     </div>
-  </form>
-      </div>
 
-      <div class="modal-footer" style="justify-content: center;">
-        <button type="submit" class="btn btn-danger" data-bs-dismiss="modal" onclick="Addproduct()">ADD</button>
-      </div>
-
-    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
   </div>
 </div>
 
-  <!-- Carousel -->
-  <div class="container my-5">
-    <div
-      id="carouselExampleCaptions"
-      class="carousel slide"
-      data-bs-ride="carousel"
-      data-bs-interval="3000">
 
-      <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"></button>
-        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"></button>
-        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"></button>
-      </div>
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img src="images/Image1.avif" class="d-block w-100" alt="Slide 1" />
-        </div>
-        <div class="carousel-item">
-          <img src="images/Image6.avif" class="d-block w-100" alt="Slide 2" />
-        </div>
-        <div class="carousel-item">
-          <img src="images/Image7.avif" class="d-block w-100" alt="Slide 3" />
-        </div>
-      </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-        <span class="carousel-control-next-icon"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
+    <!-- Products Section -->
+    <div id="productsSection" class="container my-4 flex-grow-1">
+      <h2 id="sectionTitle" class="mb-4 text-center">All Products</h2>
+      <div id="cardsContainer" class="row g-4"></div>
     </div>
-  </div>
-
-  <!-- Products Section -->
-  <div id="productsSection" class="container my-4">
-    <h2 id="sectionTitle" class="mb-4 text-center">All Products</h2>
-    <div id="cardsContainer" class="row g-4"></div>
-  </div>
    
-<footer id="foot" class="w-100 bg-dark text-white text-center py-3">
-  <p class="mb-2">© 2025 Code2Cart . All rights reserved.</p>
-  <div class="mt-2">
-    <a href="#" class="text-white text-decoration-none me-2">Facebook</a>
-    <i class="fa-brands fa-facebook"></i>
-    <a href="#" class="text-white text-decoration-none me-2">YouTube</a>
-    <i class="fa-brands fa-youtube"></i>
-    <a href="#" class="text-white text-decoration-none">Instagram</a>
-    <i class="fa-brands fa-square-instagram"></i>
-  </div>
-</footer> 
+    <!-- Footer -->
+    <footer id="foot" class="w-100 bg-dark text-white text-center py-3">
+      <p class="mb-2">© 2025 Code2Cart . All rights reserved.</p>
+      <div class="mt-2">
+        <a href="#" class="text-white text-decoration-none me-2">Facebook</a>
+        <i class="fa-brands fa-facebook"></i>
+        <a href="#" class="text-white text-decoration-none me-2">YouTube</a>
+        <i class="fa-brands fa-youtube"></i>
+        <a href="#" class="text-white text-decoration-none">Instagram</a>
+        <i class="fa-brands fa-square-instagram"></i>
+      </div>
+    </footer> 
 
-<!-- Toast Notification -->
-<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1100">
-  <div id="toastMsg" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
-    <div class="d-flex">
-      <div class="toast-body">
-        Added to cart successfully!
-      </div>
-      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
-    </div>
-  </div>
-</div>
-
-<!-- Save for Later Modal -->
-<div class="modal fade" id="saveModal" tabindex="-1" aria-labelledby="saveModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header bg-warning text-dark">
-        <h5 class="modal-title" id="saveModalLabel">Saved for Later</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        This item has been successfully saved for later.
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Okay</button>
+    <!-- Toast Notification -->
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1100">
+      <div id="toastMsg" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+          <div class="toast-body">
+            Added to cart successfully!
+          </div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+        </div>
       </div>
     </div>
-  </div>
-</div>
 
-<script src="script.js"></script>
-<script
-  src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-  crossorigin="anonymous"
-></script>
-  
+    <!-- Duplicate Warning Toast -->
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1100">
+      <div id="warningToast" class="toast align-items-center text-white bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+          <div class="toast-body">
+            This product is already in your list!
+          </div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Save for Later Modal -->
+    <div class="modal fade" id="saveModal" tabindex="-1" aria-labelledby="saveModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header bg-warning text-dark">
+            <h5 class="modal-title" id="saveModalLabel">Saved for Later</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            This item has been successfully saved for later.
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Okay</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>
