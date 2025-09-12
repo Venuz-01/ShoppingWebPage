@@ -3,7 +3,7 @@ const searchInput = document.getElementById("searchInput");
 const cartIcon = document.querySelector(".fa-shopping-cart");
 const saveIcon = document.querySelector(".fa-bookmark");
 const sectionTitle = document.getElementById("sectionTitle");
-const productsSection = document.getElementById("productsSection"); //  grab products section
+const productsSection = document.getElementById("productsSection");
 
 // Global variables
 let products = [];
@@ -12,11 +12,19 @@ let savedItems = [];
 let cartCount = 0;
 let savedCount = 0;
 
-//diglog box function
+//dialog box function
 function showSaveModal() {
     const modal1 = document.getElementById("saveModal");
     const modal = new bootstrap.Modal(modal1);
     modal.show();
+}
+
+// Toggle Carousel
+function toggleCarousel(show) {
+  const carousel = document.getElementById("carouselContainer");
+  if (carousel) {
+    carousel.style.display = show ? "block" : "none";
+  }
 }
 
 // Fetch products
@@ -25,6 +33,7 @@ fetch('http://localhost:3000/Products')
     .then(data => {
         products = data;
         displayProducts(products, "all");
+        toggleCarousel(true);
     })
     .catch(error => console.error("Error loading data:", error));
 
@@ -56,6 +65,7 @@ function Addproduct() {
                 .then(data => {
                     products = data;
                     displayProducts(products, "all");
+                    toggleCarousel(true);
                 });
         })
         .catch(() => {
@@ -77,32 +87,25 @@ function displayProducts(productsList, mode = "all") {
         return;
     }
 
-
-
-
-
     productsList.forEach(product => {
-                const card = `
+      const card = `
       <div class="col-12 col-md-4">
         <div class="card h-100 shadow">
           <img src="${product.ImagePath}" class="card-img-top" alt="${product.title}">
           <div class="card-body">
             <h5 class="card-title">${product.title}</h5>
             <p class="card-text">₹${product.Price}</p>
-             
               ${
                 mode === "cart"
                   ? `<a href="#" class="btn btn-danger remove-from-cart" data-id="${product.id}">Remove</a>`
                   : mode === "saved"
                   ? `<a href="#" class="btn btn-warning remove-from-saved" data-id="${product.id}">Remove</a>`
-                
                   : `<div class="mt-auto d-flex justify-content-between"> 
-                  <a href="#" class="btn btn-secondary add-to-cart" data-id="${product.id}">Add to Cart</a>
-                     <a href="#" class="btn btn-primary ">Buy Now</a>
-                     <a href="#" class="btn btn-secondary save-for-later " data-id="${product.id}">Save of later</a>
+                      <a href="#" class="btn btn-secondary add-to-cart" data-id="${product.id}">Add to Cart</a>
+                      <a href="#" class="btn btn-primary ">Buy Now</a>
+                      <a href="#" class="btn btn-secondary save-for-later " data-id="${product.id}">Save for later</a>
                      </div>`
               }
-            
           </div>
         </div>
       </div>
@@ -110,19 +113,20 @@ function displayProducts(productsList, mode = "all") {
     cardimage.innerHTML += card;
   });
 
-  // Add to cart --total price  section 
-    if (mode === "cart") {
-        const totalPrice = productsList.reduce((sum, product) => sum + product.Price, 0);
-        const totalHtml = `
-    <div class="col-12">
-      <div class="alert alert-success d-flex justify-content-between align-items-center fs-5 fw-bold">
-        <span>Total Price: ₹${totalPrice.toFixed(2)}</span>
-        <button class="btn btn-primary btn-sm" onclick="proceedToPayment()">Proceed to Payment</button>
-      </div>
-    </div>
-  `;
-        cardimage.innerHTML += totalHtml;
-    }
+  // Add to cart total price 
+  if (mode === "cart") {
+      const totalPrice = productsList.reduce((sum, product) => sum + product.Price, 0);
+      const totalHtml = `
+        <div class="col-12">
+          <div class="alert alert-success d-flex justify-content-between align-items-center fs-5 fw-bold">
+            <span>Total Price: ₹${totalPrice.toFixed(2)}</span>
+            <button class="btn btn-primary btn-sm" onclick="proceedToPayment()">Proceed to Payment</button>
+          </div>
+        </div>
+      `;
+      cardimage.innerHTML += totalHtml;
+  }
+
   if (mode === "all") {
     document.querySelectorAll(".add-to-cart").forEach(btn => {
       btn.addEventListener("click", (e) => {
@@ -130,11 +134,15 @@ function displayProducts(productsList, mode = "all") {
         const productId = e.target.getAttribute("data-id");
         const product = products.find(p => p.id == productId);
 
-        if (product && !cartItems.some(p => p.id == productId)) {
-          cartItems.push(product);
-          cartCount++;
-          updateCartIcon();
-          showToast(); 
+        if (product) {
+          if (!cartItems.some(p => p.id == productId)) {
+            cartItems.push(product);
+            cartCount++;
+            updateCartIcon();
+            showToast(); 
+          } else {
+            showWarningToast(); // 🔴 show warning if duplicate
+          }
         }
       });
     });
@@ -145,11 +153,15 @@ function displayProducts(productsList, mode = "all") {
         const productId = e.target.getAttribute("data-id");
         const product = products.find(p => p.id == productId);
 
-        if (product && !savedItems.some(p => p.id == productId)) {
-          savedItems.push(product);
-          savedCount++;
-          updateSavedIcon();
-          showSaveModal();  // showing confirmation message.
+        if (product) {
+          if (!savedItems.some(p => p.id == productId)) {
+            savedItems.push(product);
+            savedCount++;
+            updateSavedIcon();
+            showSaveModal();
+          } else {
+            showWarningToast(); // 🔴 show warning if duplicate
+          }
         }
       });
     });
@@ -219,27 +231,31 @@ function searchProducts() {
     product.title.toLowerCase().includes(query)
   );
   displayProducts(filtered, "all");
+  toggleCarousel(false);
 }
 
 // All Products button click
 document.getElementById("allProductsBtn").addEventListener("click", (e) => {
   e.preventDefault();
   displayProducts(products, "all");
-  productsSection.scrollIntoView({ behavior: "smooth" }); // scroll to section
+  toggleCarousel(true);
+  productsSection.scrollIntoView({ behavior: "smooth" });
 });
 
 // Cart Icon click
 cartIcon.parentElement.addEventListener("click", (e) => {
   e.preventDefault();
   displayProducts(cartItems, "cart");
-  productsSection.scrollIntoView({ behavior: "smooth" });
+  toggleCarousel(false);
+  productsSection.scrollIntoView({ behavior: "smooth", block: "start" });
 });
 
 // Save for Later Icon click
 saveIcon.parentElement.addEventListener("click", (e) => {
   e.preventDefault();
   displayProducts(savedItems, "saved");
-  productsSection.scrollIntoView({ behavior: "smooth" });
+  toggleCarousel(false);
+  productsSection.scrollIntoView({ behavior: "smooth", block: "start" });
 });
 
 // Toast Function
@@ -249,8 +265,14 @@ function showToast() {
   toast.show();
 }
 
+// Warning Toast Function 
+function showWarningToast() {
+  const toastEl = document.getElementById("warningToast");
+  const toast = new bootstrap.Toast(toastEl);
+  toast.show();
+}
+
 //payment
 function proceedToPayment() {
   alert("its just demo website no payment gateway hahaha....");
-  
 }
