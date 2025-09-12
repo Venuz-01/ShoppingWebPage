@@ -43,7 +43,14 @@ function Addproduct() {
     const rate = document.getElementById("rate").value;
     const picture = document.getElementById("picture").value;
 
+    let maxId = 0;
+    if (products.length > 0) {
+        maxId = Math.max(...products.map(p => parseInt(p.id, 10) || 0));
+    }
+    const newId = (maxId + 1).toString();
+
     const newProduct = {
+        id: newId,
         title: name,
         Price: parseFloat(rate),
         ImagePath: picture
@@ -72,6 +79,7 @@ function Addproduct() {
             alert("Failed to add product.");
         });
 }
+
 
 // Display products based on mode
 function displayProducts(productsList, mode = "all") {
@@ -141,7 +149,7 @@ function displayProducts(productsList, mode = "all") {
             updateCartIcon();
             showToast(); 
           } else {
-            showWarningToast(); // 🔴 show warning if duplicate
+            showWarningToast(); 
           }
         }
       });
@@ -160,7 +168,7 @@ function displayProducts(productsList, mode = "all") {
             updateSavedIcon();
             showSaveModal();
           } else {
-            showWarningToast(); // 🔴 show warning if duplicate
+            showWarningToast(); 
           }
         }
       });
@@ -275,4 +283,4 @@ function showWarningToast() {
 //payment
 function proceedToPayment() {
   alert("its just demo website no payment gateway hahaha....");
-}
+}   
