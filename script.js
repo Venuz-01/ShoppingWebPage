@@ -43,7 +43,8 @@ function Addproduct() {
     fetch('http://localhost:3000/Products', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json' ,
+                'Accept': 'application/json'
             },
             body: JSON.stringify(newProduct)
         })
